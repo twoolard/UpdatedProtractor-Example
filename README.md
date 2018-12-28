@@ -1,5 +1,7 @@
 # ProtractorFramework
 
+Found a protractor framework online that I liked but it was built for an angular js app so I re-created the framework using Typescript
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
 ## Development server
