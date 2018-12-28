@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
+import Base from './common-pages/base.po';
 
-export class AppPage {
+
+
+export class AppPage extends Base {
+
   navigateTo() {
     return browser.get('/');
   }
@@ -8,4 +12,5 @@ export class AppPage {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
 }

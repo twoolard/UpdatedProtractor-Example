@@ -48,9 +48,9 @@ exports.config = {
     },
 
   },
-  // baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
+    grep: '#Smoke',
     includeStackTrace: true,
     showColors: true,
     isVerbose: true,

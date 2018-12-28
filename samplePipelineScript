@@ -1,0 +1,79 @@
+#!groovy
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
+node("linux-fargate") {
+
+    try {
+
+        stage("Checkout") {
+
+            checkout([$class: 'GitSCM',
+                      branches: [[name: '*/master']],
+                      doGenerateSubmoduleConfigurations: false,
+                      extensions: [],
+                      submoduleCfg: [],
+                      userRemoteConfigs: [[credentialsId: '',
+                                           url: '']]
+            ])
+        }
+
+        dir('ecm-adminui') {
+
+            stage("NPM install") {
+                sh 'npm install'
+            }
+
+            stage("Test ng") {
+                sh 'ng test --singleRun=true --browsers=PhantomJS'
+            }
+
+            stage("e2e test") {
+
+                try {
+                    sh 'ng e2e'
+
+                    //for Smoke test
+                    sh 'ng e2e --protractorConfig=e2e/smoke.conf.js '
+
+                    //Don't forget to download html reporter plugin and configure jenkins content security policy
+//                  System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "default-src 'self'")
+                  publishHTMLReport()
+                } catch (hudson.AbortException exception) {
+                    publishHTMLReport()
+                    throw exception
+                }
+            }
+
+            stage("Version") {
+                sh "npm version '1.0.${env.BUILD_NUMBER}'"
+                dir('src') {
+                    sh "npm version '1.0.${env.BUILD_NUMBER}'"
+                }
+            }
+
+
+        }
+    } catch (err) {
+
+        if (currentBuild.result == null) {
+            currentBuild.result = 'FAILURE'
+        }
+        if (currentBuild.result != 'UNSTABLE') {
+
+        }
+    }
+
+}
+
+def publishHTMLReport(){
+    publishHTML (target: [
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        includes: '**/*.html,**/*.css,**/*.js,**/*.json,**/*.png,**/*.eot,**/*.svg,**/*.ttf,**/*.woff,**/*.woff2 ',
+        keepAll: true,
+        reportDir: 'Reports/screenshots',
+        reportFiles: 'report.html',
+        reportName: "Protractor e2e tests Report",
+        reportTitles: 'Protractor Reports',
+    ])
+}

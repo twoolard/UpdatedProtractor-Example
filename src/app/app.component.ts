@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'protractorFramework';
+  incrementedValue = 1;
+
+  IncrementValue() {
+    this.incrementedValue += 1;
+
+  }
 }
