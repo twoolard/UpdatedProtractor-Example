@@ -29,9 +29,9 @@ describe('Quality Shepherd blog', function () {
   it('should open social media link in new window', () =>  {
     const NEW_WIN_INDEX = 1;
     const githubPage = new Github();
-
-    qsHomePage.goToGit(NEW_WIN_INDEX);
     // switch to the new winwow/tab...
+    qsHomePage.goToGit(NEW_WIN_INDEX);
+    
     expect(githubPage.loaded()).toBe(true);
 
     // cleanup: close new window and switch back to original window...
