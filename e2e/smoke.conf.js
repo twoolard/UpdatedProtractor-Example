@@ -2,7 +2,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 let HtmlReporter = require('protractor-beautiful-reporter');
 const { SpecReporter } = require('jasmine-spec-reporter');
-let host = "http://localhost:4200/";
+let host = "http://localhost:49152/";
 
 exports.config = {
   allScriptsTimeout: 20000,

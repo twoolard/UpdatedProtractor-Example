@@ -1,6 +1,7 @@
 // page is non-angular
-import {$, $$, browser, by, element} from 'protractor';
+import { $, $$, browser, by, element } from 'protractor';
 import Base from '../../common-pages/base.po';
+import { Github } from './github.po';
 
 export class QsHomePagePo extends Base {
   posts;
@@ -29,9 +30,13 @@ export class QsHomePagePo extends Base {
     this.isClickable(this.postTitleLinks.first());
   }
 
-  goToGit() {
-    this.githubLink.click();
-    browser.sleep(5000);
+  // @ts-ignore
+  goToGit(NEW_WIN_INDEX) {
+    const githubPage = new Github();
+    this.githubLink.click().then(() => {
+      this.switchToWindow(NEW_WIN_INDEX);
+        browser.wait(this.isVisible(githubPage.username), this.timeout.L);
+    });
   }
 
 /*  /!**

@@ -20,9 +20,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute all of the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `ng e2e` or `protractor e2e/protractor.conf.js` to execute all of the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-Run `ng e2e --protractorConfig=e2e/smoke.conf.js` to execute the end-to-end smoke tests via [Protractor](http://www.protractortest.org/).
+Run `ng e2e --protractorConfig=e2e/smoke.conf.js` or `protractor e2e/smoke.conf.js` to execute the end-to-end smoke tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 

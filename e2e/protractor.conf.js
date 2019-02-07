@@ -2,7 +2,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 let HtmlReporter = require('protractor-beautiful-reporter');
 const { SpecReporter } = require('jasmine-spec-reporter');
-let host = "http://localhost:4200/";
+let host = "http://localhost:49152/";
 
 exports.config = {
   allScriptsTimeout: 20000,
@@ -11,6 +11,7 @@ exports.config = {
     './src/*/specs/*.e2e-spec.ts'
   ],
   exclude: [],
+  directConnect: true,
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
@@ -23,7 +24,6 @@ exports.config = {
       ]
     }
   },
-  directConnect: true,
   suites: {
     ea:'./src/ea/specs/*.e2e-spec.ts',
     qs:'./src/qs/specs/*.e2e-spec.ts',
@@ -48,7 +48,6 @@ exports.config = {
     },
 
   },
-  // baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     includeStackTrace: true,

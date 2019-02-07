@@ -1,5 +1,5 @@
-import {QsHomePagePo} from '../pages/qsHomePage.po';
-import {Github} from '../pages/github.po';
+import { QsHomePagePo } from '../pages/qsHomePage.po';
+import { Github } from '../pages/github.po';
 
 describe('Quality Shepherd blog', function () {
   let qsHomePage = new QsHomePagePo();
@@ -30,10 +30,8 @@ describe('Quality Shepherd blog', function () {
     const NEW_WIN_INDEX = 1;
     const githubPage = new Github();
 
-    qsHomePage.goToGit();
+    qsHomePage.goToGit(NEW_WIN_INDEX);
     // switch to the new winwow/tab...
-    qsHomePage.switchToWindow(NEW_WIN_INDEX);
-
     expect(githubPage.loaded()).toBe(true);
 
     // cleanup: close new window and switch back to original window...
